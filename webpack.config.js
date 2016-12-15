@@ -27,12 +27,6 @@ module.exports = {
     publicPath: "/public/js",
     filename: "bundle.js"
   },
-  node: {
-    console: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  },
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),

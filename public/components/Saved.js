@@ -6,6 +6,8 @@ export default class Saved extends React.Component {
   }
 
   render() {
-    return null;
+    return (
+null
+    )
   }
 }

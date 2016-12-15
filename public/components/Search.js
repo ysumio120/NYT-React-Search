@@ -9,36 +9,47 @@ export default class Search extends React.Component {
     this.state = {
       results: null
     }
-    this.onSearch = this.onSearch.bind(this);
+    this.getValues = this.getValues.bind(this);
   }
 
-  onSearch(query) {
+  getValues() {
+    var topic = document.getElementById("topic").value;
+    var startYear = document.getElementById("startYear").value.replace(/-/g, "");
+    var endYear = document.getElementById("endYear").value.replace(/-/g, "");
+
+    var queryObj = {
+      topic,
+      startYear,
+      endYear
+    }
+
+    this.onAPICall(queryObj);
+  }
+
+  onAPICall(query) {
     var url = "http://api.nytimes.com/svc/search/v2/articlesearch.json";
-    // url += "api-key=" + "6601e964b0224f6e952a2a58be8d2d82" + "&";
-    // url += "q=" + query.topic + "&";
-    // url += "begin_date=" + query.startYear + "&";
-    // url += "end_date=" + query.endYear;
-    //console.log(url);
-    let self = this; 
-    // $.ajax({
-    //   url: url,
-    //   dataType: "json",
-    //   data: {
-    //     q: query.topic,
-    //     begin_date: query.startYear,
-    //     end_date: query.endYear,
-    //     "api-key": "6601e964b0224f6e952a2a58be8d2d82"
-    //   }
-    // }).then(function(response) {
-    //     self.setState({results: response});
-    // })
+    var self = this;
+    if(query == null) 
+      return; 
+
+    $.ajax({
+      url: url,
+      dataType: "json",
+      data: {
+        q: query.topic,
+        begin_date: query.startYear,
+        end_date: query.endYear,
+        "api-key": "6601e964b0224f6e952a2a58be8d2d82"
+      }
+    }).then(function(response) {
+      self.setState({results: response});
+    })
   }
 
   render() {
     return (
       <div>
-        <p>{this.state.results}</p>
-        <Query onSearch={this.onSearch}/>
+        <Query onSearch={this.getValues}/>
         <Results results={this.state.results} />
       </div> 
     )  
