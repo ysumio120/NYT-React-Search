@@ -1,11 +1,10 @@
 import React from "react";
 import Query from "./Query";
 import Results from "./Results";
-import $ from "jquery";
 
 export default class Search extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       results: null
     }
@@ -50,7 +49,7 @@ export default class Search extends React.Component {
     return (
       <div>
         <Query onSearch={this.getValues}/>
-        <Results results={this.state.results} />
+        <Results results={this.state.results} onSave={this.props.onSave}/>
       </div> 
     )  
   }

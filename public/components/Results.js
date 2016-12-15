@@ -4,19 +4,19 @@ export default class Results extends React.Component {
  constructor(){
     super();
 
-    this.saveHandler = this.saveHandler.bind(this);
+    //this.saveHandler = this.saveHandler.bind(this);
   }
 
-  saveHandler(e) {
-    let button = $(e.currentTarget);
-    let title = button.attr("data-title");
-    let date = button.attr("data-date");
-    let url = button.attr("data-url");
-    console.log(title);
-    $.post("/api/saved", {title: title, date: date, url: url}, function(response) {
-      console.log(response);
-    })
-  }
+  // saveHandler(e) {
+  //   let button = $(e.currentTarget);
+  //   let title = button.attr("data-title");
+  //   let date = button.attr("data-date");
+  //   let url = button.attr("data-url");
+  //   console.log(title);
+  //   $.post("/api/saved", {title: title, date: date, url: url}, function(response) {
+  //     console.log(response);
+  //   })
+  // }
 
   displayArticles() {
     console.log(this.props.results)
@@ -28,7 +28,7 @@ export default class Results extends React.Component {
           return (
             <li key={index}>
               <a href={doc.web_url} target="_blank">{doc.headline.main}</a>
-              <button onClick={this.saveHandler} className="save" data-title={doc.headline.main} data-date={doc.pub_date} data-url={doc.web_url}>Save</button>
+              <button onClick={this.props.onSave} className="save" data-title={doc.headline.main} data-date={doc.pub_date} data-url={doc.web_url}>Save</button>
             </li>
           )
         }

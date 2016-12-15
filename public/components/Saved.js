@@ -5,9 +5,13 @@ export default class Saved extends React.Component {
     super();
   }
 
+  displaySaved() {
+
+  }
+
   render() {
     return (
-null
+    null
     )
   }
 }
