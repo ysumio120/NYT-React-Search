@@ -9,7 +9,9 @@ router.get("/", function(req, res) {
 })
 
 router.get("/api/saved", function(req, res) {
-  res.send("test");
+  Articles.find({}, function(err, articles) {
+  	res.json(articles);
+  })
 })
 
 router.post("/api/saved", function(req, res) {

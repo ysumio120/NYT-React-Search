@@ -1,7 +1,5 @@
 var mongoose = require("mongoose");
 
-
-
 var nytSchema = new mongoose.Schema({
   title: {type: String, required: true},
   date: {type: Date, required: true},
