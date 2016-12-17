@@ -8,7 +8,7 @@ export default class Saved extends React.Component {
   render() {
     return (
       <div className="panel panel-default">
-        <div className="panel-heading text-center">Search</div>
+        <div className="panel-heading text-center"><h4>Search</h4></div>
         <div className="panel-body">
           <label htmlFor="topic">Topic</label>
           <input type="text"  id="topic"/>

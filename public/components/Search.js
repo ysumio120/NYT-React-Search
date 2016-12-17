@@ -1,6 +1,7 @@
 import React from "react";
 import Query from "./Query";
 import Results from "./Results";
+import axios from "axios";
 
 export default class Search extends React.Component {
   constructor(props){
@@ -26,23 +27,17 @@ export default class Search extends React.Component {
   }
 
   onAPICall(query) {
-    var url = "http://api.nytimes.com/svc/search/v2/articlesearch.json";
-    var self = this;
+    var url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?";
+    url += "q=" + query.topic + "&";
+    url += "begin_date=" + query.startYear + "&";
+    url += "end_date=" + query.endYear + "&";
+    url += "api-key=" + "6601e964b0224f6e952a2a58be8d2d82";
     if(query == null) 
       return; 
 
-    $.ajax({
-      url: url,
-      dataType: "json",
-      data: {
-        q: query.topic,
-        begin_date: query.startYear,
-        end_date: query.endYear,
-        "api-key": "6601e964b0224f6e952a2a58be8d2d82"
-      }
-    }).then(function(response) {
-      self.setState({results: response});
-    })
+    axios.get(url: url).then(function(response) {
+      this.setState({results: response.data.response});
+    }.bind(this))
   }
 
   render() {

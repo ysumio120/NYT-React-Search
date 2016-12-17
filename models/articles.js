@@ -9,13 +9,3 @@ var nytSchema = new mongoose.Schema({
 var Articles = mongoose.model("Articles", nytSchema);
 
 module.exports = Articles;
-
-/*
-Tabs Array Structure
-{
-	[
-		label: String,
-		streamers: [ { name: String, display_name: String } ]
-	]
-}
-*/

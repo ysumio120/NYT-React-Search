@@ -1,40 +1,46 @@
 import React from "react";
+import axios from "axios";
 
 export default class Saved extends React.Component {
   constructor(){
     super();
 
     this.state = {
-      saved: [];
+      saved: []
     }
    // console.log(this.displaySaved());
   }
 
-  displaySaved() {
-    var self = this;
-    $.get("/api/saved", function(data) {
-      console.log(data);
-      let saved = data.map(function(article, index) {
-        return (
-          <li key={index}>
-            <a href={article.url} target="_blank">{article.title}</a>
-            <button onClick={self.props.onRemove} className="remove" data-id={article._id}>Remove</button>
-          </li>
-        )
-      })
+  componentDidUpdate(prevProps, prevState) {
+    axios.get("/api/saved").then(function(response) {
+      this.setState({saved: response.data});
+    }.bind(this))
+  }
 
-      this.setState({saved: saved});
-    })
+  componentDidMount() {
+    axios.get("/api/saved").then(function(response) {
+      this.setState({saved: response.data});
+    }.bind(this))
+  }
+
+  displaySaved() {
+    return this.state.saved.map(function(article, index) {
+      return (
+        <li key={index}>
+          <a href={article.url} target="_blank">{article.title}</a>
+          <button onClick={this.props.onRemove} className="remove btn btn-danger" data-id={article._id}>Remove</button>
+        </li>
+      )
+    }, this)
   }
 
   render() {
-    console.log(this.displaySaved());
     return (
       <div className="panel panel-default">
-        <div className="panel-heading text-center">Saved</div>
+        <div className="panel-heading text-center"><h4>Saved</h4></div>
         <div className="panel-body">
           <ul>
-            {this.state.saved}
+            {this.displaySaved()}
           </ul>
         </div>
       </div>

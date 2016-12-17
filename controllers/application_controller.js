@@ -1,5 +1,6 @@
 var express = require("express");
 var path = require("path");
+var mongoose = require("mongoose");
 var Articles = require("../models/articles");
 
 var router = express.Router();
@@ -19,15 +20,22 @@ router.post("/api/saved", function(req, res) {
   var date = req.body.date;
   var url = req.body.url;
 
-  Articles.create({title: title, url: url, date: date}, function(err, article) {
+  var article = {
+    title, date, url
+  }
+
+  Articles.update({$and: [{title: title}, {url: url}]},{$setOnInsert: article}, {upsert: true}, function(err, article) {
     if(err) throw err;
 
     res.send("ok");
   })
 })
 
-router.delete("/api/saved", function(req, res) {
-  
+router.delete("/api/saved/:id", function(req, res) {
+  var id = mongoose.Types.ObjectId(req.params.id);
+  Articles.findByIdAndRemove(id, function(err, article) {
+    res.send(article);
+  })
 })
 
 module.exports = router;

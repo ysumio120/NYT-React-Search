@@ -6,9 +6,10 @@ li {
   border: 1px solid black;
   text-decoration: none;
   margin: 2px 0;
-  padding: 5px 0;
+  padding: 5px 5px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 label, input {
@@ -17,4 +18,10 @@ label, input {
 
 .search {
   margin-top: 10px;
+}
+
+.jumbotron,
+.panel-default > .panel-heading {
+  background-color: black;
+  color: white;
 }
