@@ -27,7 +27,7 @@ export default class Search extends React.Component {
   }
 
   onAPICall(query) {
-    var url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?";
+    var url = "https://crossorigin.me/http://api.nytimes.com/svc/search/v2/articlesearch.json?";
     url += "q=" + query.topic + "&";
     url += "begin_date=" + query.startYear + "&";
     url += "end_date=" + query.endYear + "&";
