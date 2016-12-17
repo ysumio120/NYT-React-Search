@@ -7,7 +7,6 @@ export default class Results extends React.Component {
   }
 
   displayArticles() {
-    console.log(this.props.results)
     if(this.props.results == null)
       return []
     else {

@@ -36,7 +36,6 @@ export default class Main extends React.Component {
   }
 
   render() {
-    console.log("test");
     return (
       <div className="container">
         <div className="jumbotron text-center">
