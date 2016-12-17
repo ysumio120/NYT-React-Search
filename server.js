@@ -12,7 +12,7 @@ var port = process.env.PORT || 8080;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/')));
 app.use("/", application_controller);
 
 app.listen(port, function() {
